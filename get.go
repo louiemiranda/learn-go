@@ -26,7 +26,7 @@ func main() {
 	simpleGetJSON()
 }
 
-// simpleGet: Retrieve actual body
+// simpleGet: Retrieve raw body
 func simpleGet() {
 
 	res, err := http.Get(apiURL)
