@@ -7,9 +7,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 const (
@@ -17,20 +19,19 @@ const (
 )
 
 func main() {
-	println("Processing...")
+	println("Processing...\n")
 
 	simpleGet()
+	simpleGetJSON()
 }
 
 // simpleGet: Retrieve actual body
 func simpleGet() {
 
 	res, err := http.Get(apiURL)
-
 	if err != nil {
 		panic(err.Error)
 	}
-	// defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	res.Body.Close()
@@ -39,14 +40,32 @@ func simpleGet() {
 		panic(err.Error)
 	}
 
-	fmt.Printf("%s", body)
+	// fmt.Println(runtime.Caller(0)) // find equivalent of __METHOD__ like on PHP?
+	fmt.Println("simpleGet():")
+	fmt.Println(res.StatusCode)
+	fmt.Printf("%s\n", body)
+}
 
-	// var data string
-	// json.Unmarshal(body, &data)
-	// fmt.Println(res.StatusCode)
-	// fmt.Printf("Results: %v\n", data)
-	// os.Exit(0)
+func simpleGetJSON() {
+	res, err := http.Get(apiURL)
+	if err != nil {
+		panic(err.Error)
+	}
 
+	body, err := ioutil.ReadAll(res.Body)
+	res.Body.Close()
+
+	if err != nil {
+		panic(err.Error)
+	}
+
+	var data string
+	json.Unmarshal(body, &data)
+
+	fmt.Println("\nsimpleGetJSON():")
+	fmt.Println(res.StatusCode)
+	fmt.Printf("%s\n", data)
+	os.Exit(0)
 }
 
 func clientGet() {
