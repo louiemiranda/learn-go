@@ -7,11 +7,9 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"os"
 )
 
 const (
@@ -20,9 +18,11 @@ const (
 
 func main() {
 	println("Processing...")
+
+	simpleGet()
 }
 
-// simpleGet: Simple API/json parser from a defined URL
+// simpleGet: Retrieve actual body
 func simpleGet() {
 
 	res, err := http.Get(apiURL)
@@ -33,16 +33,19 @@ func simpleGet() {
 	// defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
+	res.Body.Close()
 
 	if err != nil {
 		panic(err.Error)
 	}
 
-	var data string
-	json.Unmarshal(body, &data)
-	fmt.Println(res.StatusCode)
-	fmt.Printf("Results: %v\n", data)
-	os.Exit(0)
+	fmt.Printf("%s", body)
+
+	// var data string
+	// json.Unmarshal(body, &data)
+	// fmt.Println(res.StatusCode)
+	// fmt.Printf("Results: %v\n", data)
+	// os.Exit(0)
 
 }
 
