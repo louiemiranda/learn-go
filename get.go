@@ -1,8 +1,17 @@
+/**
+ * jlxm: Learning Go-lang
+ * Go-lang GET, HTTP/S, API, CLIENT/REQ/RES
+ * References:
+ * -
+ */
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 const (
@@ -13,25 +22,28 @@ func main() {
 	println("Processing...")
 }
 
+// simpleGet: Simple API/json parser from a defined URL
 func simpleGet() {
 
-	resp, err := http.Get(apiURL)
+	res, err := http.Get(apiURL)
+
+	if err != nil {
+		panic(err.Error)
+	}
+	// defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+
 	if err != nil {
 		panic(err.Error)
 	}
 
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err.Error)
-	}
+	var data string
+	json.Unmarshal(body, &data)
+	fmt.Println(res.StatusCode)
+	fmt.Printf("Results: %v\n", data)
+	os.Exit(0)
 
-	println(resp.StatusCode)
-	print(body)
-
-	// json.Unmarshal(body, &data)
-	// fmt.Printf("Result: %v\n", data)
-	// os.Exit(0)
 }
 
 func clientGet() {
