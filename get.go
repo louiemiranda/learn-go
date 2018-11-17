@@ -2,7 +2,8 @@
  * jlxm: Learning Go-lang
  * Go-lang GET, HTTP/S, API, CLIENT/REQ/RES
  * References:
- * -
+ * - https://golang.org/pkg/net/http/
+ * - https://stackoverflow.com/questions/17156371/how-to-get-json-response-in-golang
  */
 package main
 
