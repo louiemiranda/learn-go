@@ -12,8 +12,15 @@ func main() {
 
 	params := os.Args
 	condition := os.Args[1]
-	a := strconv.Atoi(os.Args[2])
-	b := strconv.Atoi(os.Args[3])
+	a, err := strconv.Atoi(os.Args[2])
+	if err != nil {
+		panic(err)
+	}
+
+	b, err := strconv.Atoi(os.Args[3])
+	if err != nil {
+		panic(err)
+	}
 
 	fmt.Println("Hello, what is your condition? ", condition)
 	fmt.Println(params)
