@@ -2,11 +2,7 @@ package main
 
 import "fmt"
 
-type math string
-
-func (m math) Compute() {
-	fmt.Println("Computation")
+func Add(x int, y int) int {
+	fmt.Println("Add: x=%d + y=%d", x, y)
+	return x + y
 }
-
-// Exported as symbol named "Calc"
-var Calc math

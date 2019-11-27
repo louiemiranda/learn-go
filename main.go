@@ -3,56 +3,42 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"plugin"
+	"strconv"
 )
-
-type Calc interface {
-	Compute()
-}
 
 func main() {
 
 	params := os.Args
 	condition := os.Args[1]
+	a := strconv.Atoi(os.Args[2])
+	b := strconv.Atoi(os.Args[3])
 
 	fmt.Println("Hello, what is your condition? ", condition)
 	fmt.Println(params)
 
-	var mod string
-	switch condition; {
-	case "math":
-		fmt.Println("Should do math computation, ", condition)
-		mod = "./app/math.so"
-
-	default:
-		panic("Unrecognized Value")
-	}
-
-	// load module
-	// 1. open the so file to load the symbols
-	plug, err := plugin.Open(mod)
+	plugins, err := filepath.Glob("app/math.so")
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		panic(err)
 	}
 
-	// 2. look up a symbol (an exported function or variable)
-	// in this case, variable Greeter
-	symGreeter, err := plug.Lookup("Calc")
+	fmt.Println("Loading plugin %s", plugins[0])
+	p, err := plugin.Open(plugins[0])
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		panic(err)
 	}
 
-	// 3. Assert that loaded symbol is of a desired type
-	// in this case interface type Greeter (defined above)
-	var greeter Greeter
-	greeter, ok := symGreeter.(Greeter)
+	symbol, err := p.Lookup(condition)
+	if err != nil {
+		panic(err)
+	}
+
+	addFunc, ok := symbol.(func(int, int) int)
 	if !ok {
-		fmt.Println("unexpected type from module symbol")
-		os.Exit(1)
+		panic("Plugin has no Add(int)int function")
 	}
 
-	// 4. use the module
-	greeter.Greet()
+	addition := addFunc(a, b)
+	fmt.Println("Add: %d", addition)
 }
