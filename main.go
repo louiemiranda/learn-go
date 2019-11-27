@@ -1,3 +1,8 @@
+/**
+ * Working Go-lang using plugins to conduct dynamic method calculations
+ *
+ * @author Louie Miranda (lmiranda@gmail.com)
+ */
 package main
 
 import (
@@ -10,8 +15,7 @@ import (
 
 func main() {
 
-	params := os.Args
-	condition := os.Args[1]
+	operator := os.Args[1]
 	a, err := strconv.Atoi(os.Args[2])
 	if err != nil {
 		panic(err)
@@ -22,8 +26,8 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println("Hello, what is your condition? ", condition)
-	fmt.Println(params)
+	fmt.Println("Operator: ", operator)
+	// fmt.Println(params)
 
 	plugins, err := filepath.Glob("app/math.so")
 	if err != nil {
@@ -36,16 +40,16 @@ func main() {
 		panic(err)
 	}
 
-	symbol, err := p.Lookup(condition)
+	symbol, err := p.Lookup(operator)
 	if err != nil {
 		panic(err)
 	}
 
-	addFunc, ok := symbol.(func(int, int) int)
+	calc, ok := symbol.(func(int, int) int)
 	if !ok {
-		panic("Plugin has no Add(int)int function")
+		panic("Plugin has no specific function.")
 	}
 
-	addition := addFunc(a, b)
-	fmt.Println("Add: %d", addition)
+	result := calc(a, b)
+	fmt.Println("Result: ", result)
 }
