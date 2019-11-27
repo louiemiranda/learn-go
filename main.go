@@ -5,6 +5,10 @@ import (
 	"os"
 )
 
+type Calc interface {
+	Compute()
+}
+
 func main() {
 
 	params := os.Args
@@ -13,14 +17,12 @@ func main() {
 	fmt.Println("Hello, what is your condition? ", condition)
 	fmt.Println(params)
 
-	switch condition {
-	case "add":
-		fmt.Println("Should do addition", params)
-
-	case "multiply":
-		fmt.Println("Should do multiplication", params)
+	switch condition; {
+	case "math":
+		fmt.Println("Should do math computation, ", condition)
+		mod = "./app/math.so"
 
 	default:
-		panic("unrecognized value")
+		panic("Unrecognized Value")
 	}
 }
