@@ -1,55 +1,35 @@
-/**
- * Working Go-lang using plugins to conduct dynamic method calculations
- *
- * @author Louie Miranda (lmiranda@gmail.com)
- */
 package main
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
-	"plugin"
-	"strconv"
+	"io/ioutil"
+	"net/http"
+)
+
+const (
+	API = "http://noah.up.edu.ph/api/doppler"
 )
 
 func main() {
+	println("Processing...")
 
-	operator := os.Args[1]
-	a, err := strconv.Atoi(os.Args[2])
+	retrieveRaw()
+}
+
+func retrieveRaw() {
+
+	res, err := http.Get(API)
 	if err != nil {
 		panic(err)
 	}
+	println(res)
 
-	b, err := strconv.Atoi(os.Args[3])
+	body, err := ioutil.ReadAll(res.Body)
+	res.Body.Close()
 	if err != nil {
 		panic(err)
 	}
+	println(res.StatusCode)
+	fmt.Printf("%s\n", body)
 
-	fmt.Println("Operator: ", operator)
-	// fmt.Println(params)
-
-	plugins, err := filepath.Glob("app/math.so")
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("Loading plugin %s", plugins[0])
-	p, err := plugin.Open(plugins[0])
-	if err != nil {
-		panic(err)
-	}
-
-	symbol, err := p.Lookup(operator)
-	if err != nil {
-		panic(err)
-	}
-
-	calc, ok := symbol.(func(int, int) int)
-	if !ok {
-		panic("Plugin has no specific function.")
-	}
-
-	result := calc(a, b)
-	fmt.Println("Result: ", result)
 }
