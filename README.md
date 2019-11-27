@@ -1,6 +1,6 @@
 # learn-go
 
-Branch for go-lang using plugins to do match calculations.
+Branch for go-lang using plugins to do math calculations.
 
 ## Compile
 
