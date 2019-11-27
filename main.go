@@ -7,10 +7,20 @@ import (
 
 func main() {
 
-	args := os.Args
+	params := os.Args
+	condition := os.Args[1]
 
-	// fmt.Println(len())
+	fmt.Println("Hello, what is your condition? ", condition)
+	fmt.Println(params)
 
-	fmt.Println("Hello, ", args[:1])
-	fmt.Println(args)
+	switch condition {
+	case "add":
+		fmt.Println("Should do addition", params)
+
+	case "multiply":
+		fmt.Println("Should do multiplication", params)
+
+	default:
+		panic("unrecognized value")
+	}
 }
