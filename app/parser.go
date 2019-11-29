@@ -6,12 +6,16 @@ import (
 	"net/http"
 )
 
-var status = "processing"
+var projStatus = "processing"
 
 // const
 const (
 	API = "http://noah.up.edu.ph/api/doppler"
 )
+
+type res struct {
+	body string
+}
 
 func retrieve() {
 

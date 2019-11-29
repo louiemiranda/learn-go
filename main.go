@@ -23,6 +23,8 @@ import (
 func main() {
 	println("Processing...", app.API)
 
+	println("Debug", app.API)
+
 	// var (
 	// 	err error
 	// )
