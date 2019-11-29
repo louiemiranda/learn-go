@@ -1,7 +1,11 @@
-// Package main is the entry point
 package main
 
 // utils "github.com/louiemiranda/learn-go/utils/parser"
+
+// import (
+// 	"github.com/louiemiranda/learn-go/app/version"
+// 	// "app/version"
+// )
 
 // var (
 // 	app parser.App
@@ -15,7 +19,7 @@ package main
 func main() {
 	println("Processing...")
 
-	utils.status
+	// utils.status
 
 	// var (
 	// 	err error
