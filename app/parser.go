@@ -6,11 +6,6 @@ import (
 	"net/http"
 )
 
-var projStatus = "processing"
-
-// API string
-// var API string = "http://noah.up.edu.ph/api/doppler"
-
 // const
 const (
 	API string = "http://noah.up.edu.ph/api/doppler"
@@ -21,24 +16,25 @@ type res struct {
 }
 
 func init() {
-	fmt.Println("parser loaded via init")
-	retrieve()
+	fmt.Println("learn-go/app/parser -- loaded via init")
+	// Retrieve()
 }
 
-func retrieve() {
+// Retrieve actual API call
+func Retrieve() {
 
 	res, err := http.Get(API)
 	if err != nil {
 		panic(err)
 	}
-	println(res)
+	// println(res)
 
 	body, err := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 	if err != nil {
 		panic(err)
 	}
-	println(res.StatusCode)
+	println("http.status_code: ", res.StatusCode)
 	fmt.Printf("%s\n", body)
 
 }

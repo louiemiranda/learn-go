@@ -7,4 +7,7 @@ import (
 // main
 func main() {
 	println("Processing...", app.API)
+
+	app.Retrieve()
+
 }
