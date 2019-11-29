@@ -8,9 +8,12 @@ import (
 
 var projStatus = "processing"
 
+// API string
+// var API string = "http://noah.up.edu.ph/api/doppler"
+
 // const
 const (
-	API = "http://noah.up.edu.ph/api/doppler"
+	API string = "http://noah.up.edu.ph/api/doppler"
 )
 
 type res struct {
