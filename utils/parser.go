@@ -1,4 +1,4 @@
-package parser
+package utils
 
 import (
 	"fmt"
@@ -6,13 +6,14 @@ import (
 	"net/http"
 )
 
+var status = "processing"
+
+// const
 const (
 	API = "http://noah.up.edu.ph/api/doppler"
 )
 
-func retrieveRaw() {
-
-	a := App{}
+func retrieve() {
 
 	res, err := http.Get(API)
 	if err != nil {
