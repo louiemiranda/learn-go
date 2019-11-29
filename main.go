@@ -1,5 +1,9 @@
 package main
 
+import (
+	app "github.com/louiemiranda/learn-go/app"
+)
+
 // utils "github.com/louiemiranda/learn-go/utils/parser"
 
 // import (
@@ -17,9 +21,7 @@ package main
 
 // Main should be the starting method
 func main() {
-	println("Processing...")
-
-	// utils.status
+	println("Processing...", app.API)
 
 	// var (
 	// 	err error
