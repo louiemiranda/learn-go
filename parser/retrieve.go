@@ -1,4 +1,4 @@
-package main
+package parser
 
 import (
 	"fmt"
@@ -10,13 +10,9 @@ const (
 	API = "http://noah.up.edu.ph/api/doppler"
 )
 
-func main() {
-	println("Processing...")
-
-	retrieveRaw()
-}
-
 func retrieveRaw() {
+
+	a := App{}
 
 	res, err := http.Get(API)
 	if err != nil {
