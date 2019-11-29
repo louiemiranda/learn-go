@@ -20,6 +20,11 @@ type res struct {
 	body string
 }
 
+func init() {
+	fmt.Println("parser loaded via init")
+	retrieve()
+}
+
 func retrieve() {
 
 	res, err := http.Get(API)

@@ -7,7 +7,4 @@ import (
 // main
 func main() {
 	println("Processing...", app.API)
-
-	println("Debug")
-
 }
