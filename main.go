@@ -1,12 +1,17 @@
 package main
 
 import (
-	app "github.com/louiemiranda/learn-go/app"
+	"fmt"
+	"net/http"
 )
 
-func main() {
-	println("Processing -- client-api-weather")
-	println("Accessing...", app.API, "\n")
+func hello(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprint(w, "Hello Client")
+}
 
-	app.Retrieve()
+func main() {
+	http.HandleFunc("/", hello)
+
+	http.ListenAndServe(":8080", nil)
+
 }
