@@ -1,7 +1,6 @@
 package app
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -18,7 +17,7 @@ type res []struct {
 	VerboseName string    `json:"verbose_name"`
 	Extent      []float64 `json:"extent"`
 	Size        []int     `json:"size"`
-	resData		string	string
+	// resData		string	string
 }
 
 type respx struct {
@@ -32,7 +31,7 @@ type respx struct {
 // Retrieve actual API call
 func Retrieve() {
 
-	data := resData{}
+	// data := resData{}
 
 	res, err := http.Get(API)
 	if err != nil {
@@ -49,5 +48,5 @@ func Retrieve() {
 	println("http.status_code: ", res.StatusCode)
 	fmt.Printf("%s\n", body)
 
-	err = json.Unmarshal(body, &resData)
+	// err = json.Unmarshal(body, &resData)
 }
