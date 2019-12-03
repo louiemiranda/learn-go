@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -14,6 +15,6 @@ func say(s string) {
 }
 
 func main() {
-	go say("Hello")
-	say("Yes")
+	go say(os.Args[1])
+	say("Internal")
 }
