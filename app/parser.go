@@ -18,6 +18,7 @@ type res []struct {
 	VerboseName string    `json:"verbose_name"`
 	Extent      []float64 `json:"extent"`
 	Size        []int     `json:"size"`
+	resData		string	string
 }
 
 type respx struct {
