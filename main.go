@@ -2,19 +2,9 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"time"
+	"math/rand"
 )
 
-func say(s string) {
-	for i := 0; i < 3; i++ {
-		fmt.Println(s)
-		time.Sleep(time.Millisecond * 100)
-		// fmt.Println(time.Millisecond)
-	}
-}
-
 func main() {
-	go say(os.Args[1])
-	say("Internal")
+	fmt.Println("My favorite number is", rand.Intn(10))
 }
