@@ -8,6 +8,7 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", okHandler)
+	mux.HandleFunc("/pass", okHandler)
 
 	// Wrap the servemux with the limit middleware.
 	log.Println("Listening on :8888...")
